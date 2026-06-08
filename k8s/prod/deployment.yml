@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-app-prod
+  namespace: prod
+  labels:
+    app: flask-app
+    env: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flask-app
+      env: prod
+  template:
+    metadata:
+      labels:
+        app: flask-app
+        env: prod
+    spec:
+      containers:
+      - name: flask-app
+        image: YOUR_DOCKERHUB_USERNAME/flask-devops-app:stable
+        ports:
+        - containerPort: 5000
+        env:
+        - name: ENV
+          value: "prod"
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "256Mi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+          initialDelaySeconds: 5
+          periodSeconds: 5
