@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: flask-app
-        image: YOUR_DOCKERHUB_USERNAME/flask-devops-app:stable
+        image: bibhishandhagate/flask-devops-app:stable
         ports:
         - containerPort: 5000
         env:
