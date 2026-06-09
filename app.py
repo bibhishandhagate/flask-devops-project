@@ -7,7 +7,7 @@ metrics = PrometheusMetrics(app)
 @app.route('/')
 def home():
     return jsonify({
-        'message': 'Hello from Flask DevOps App!',
+        'message': 'Hello from Flask DevOps App! this is version 2',
         'version': '1.0.0',
         'env': 'dev'
     })
